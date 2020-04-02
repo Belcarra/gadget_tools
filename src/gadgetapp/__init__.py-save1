@@ -1,0 +1,132 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# Set encoding default for python 2.7
+# vim: syntax=python noexpandtab
+
+# N.B. tkinter appears to be installed by default for full raspbian desktop install (2020-01).
+#
+# imagetk cannot be installed with pip or pip3
+#
+# If not available then either synaptic or for Raspbian Preferences -> Add / Remove Software
+# search for imagetk and install:
+#
+# 	python3-pil.imagetk
+#
+# Or from terminal command line:
+#
+# 	apt-get install python3-pil.imagetk
+#
+#
+from tkinter import filedialog, ttk
+import tkinter as tk
+from tkinter.messagebox import *
+
+#from pygtail import Pygtail
+
+
+class GadgetApp:
+	def __init__(self):
+		self.tk=Tk();
+		self.tabs=0;
+		self.frame=Frame(self.tk);
+		self.nb=Notebook(self.frame);
+		self.nb.bind("<ButtonRelease-1>", self.test);
+		self.frame.pack();
+		for x in range(5):
+			self.add_tab();
+		self.nb.pack();
+		self.tk.mainloop();
+	def add_tab(self):
+		newTabFrame=Frame(self.nb);
+		text=Text(newTabFrame);
+		text.pack();
+		if self.tabs==0:
+			self.nb.add(newTabFrame, text=str(self.tabs), compound=TOP);
+		else:
+			self.nb.add(newTabFrame, text=str(self.tabs));
+		self.tabs+=1;
+	def test(self, event=None):
+		showinfo("Success", "It works!");
+		#Imagine the code for selecting the text widget is here.
+		return "break";
+
+if __name__ == '__main__':
+	e=GadgetApp();
+	try:
+		e.tk.destroy();
+	except:
+		pass;
+
+
+# class Application(tk.Frame):
+# 	def __init__(self):
+# 		#super(Applicaton,self).__init__(window)
+# 		self.window = tk.Tk()
+# 		super().__init__(self.window)
+# 		self.pack()
+# 
+# 
+# 
+# 	def nb_test(self, event):
+# 		showinfo("nb_test")
+# 		print("nb_test: event: %s" % (event))
+# 	def tab_udc(self, event):
+# 		showinfo("tab_udc")
+# 		print("tab_udc: event: %s" % (event))
+# 	def tab_gadget(self, event):
+# 		showinfo("tab_gadget")
+# 		print("tab_gadget: event: %s" % (event))
+# 
+# 	def create_widgets(self):
+# 		showinfo("init")
+# 		self.form = tk.Tk()
+# 		self.form.title("Gadget USB Device")
+# 		self.form.geometry("500x300")
+# 		self.notebook = ttk.Notebook(self.form)
+# 		self.notebook.bind("NOTEBOOK Tab Change", self.nb_test)
+# 
+# 		self.tab1 = ttk.Frame(self.notebook)
+# 		self.tab1.bind("UDC Tab Change", self.tab_udc)
+# 
+# 		self.tab2 = ttk.Frame(self.notebook)
+# 		self.tab2.bind("GADGET Tab Change", self.tab_gadget)
+# 
+# 		self.notebook.add(self.tab1, text="UDC")
+# 		self.notebook.add(self.tab2, text="Gadget")
+# 		self.notebook.pack(expand=1, fill='both')
+# 
+# 		#self.hi_there = tk.Button(self)
+# 		#self.hi_there["text"] = "Hello World\n(click me)"
+# 		#self.hi_there["command"] = self.say_hi
+# 		#self.hi_there.pack(side="top")
+# 
+# 		#self.quit = tk.Button(self, text="Quit", fg="red", command=self.window.destroy)
+# 		#self.quit.pack(side="bottom")
+# 
+# 	def getfile(self):
+# 		filename = filedialog.askopenfilename(initialdir = "/etc/gadgetservice")
+# 		print(filename)
+# 		return filename
+# 
+# 
+# 	def scrolledtext(self, info):
+# 		#win = tk.TopLevel(self.window)
+# 		win = self.window
+# 		win.title("TEST")
+# 		#center_window(win, 400, 300)
+# 		frml = tk.Frame(win)
+# 		text = scrolledtext.ScrolledText(frml, height=8)
+# 		text.insert('1.0', info)
+# 
+# 
+# 		
+# 
+# 	def say_hi(self):
+# 		print("hi there, everyone!")
+# 
+# app = Application()
+# app.create_widgets()
+# #app.getfile()
+# #app.scrolledtext("XXXX")
+# app.mainloop()
+
